@@ -8,8 +8,6 @@ import {
   MinLength,
 } from 'class-validator';
 
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
 export class CreateUserDto {
   @IsString()
   @IsOptional()
