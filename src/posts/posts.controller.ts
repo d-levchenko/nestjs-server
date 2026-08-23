@@ -13,6 +13,7 @@ import { PostsService } from './providers/posts.service';
 import { GetPostsParamDto } from './dtos/get-posts-param.dto';
 import { CreatePostDto } from './dtos/create-post.dto';
 import { PatchPostDto } from './dtos/patch-post.dto';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('posts')
 export class PostsController {
@@ -31,11 +32,21 @@ export class PostsController {
     return this.postsService.getAllPosts(getPostsParamDto, limit, page);
   }
 
+  @ApiOperation({ summary: 'Create post' })
+  @ApiResponse({
+    status: 201,
+    description: 'The post has been successfully created.',
+  })
   @Post()
   public createPost(@Body() createPostDto: CreatePostDto) {
     return this.postsService.createPost(createPostDto);
   }
 
+  @ApiOperation({ summary: 'Update post' })
+  @ApiResponse({
+    status: 200,
+    description: 'The post has been successfully updated.',
+  })
   @Patch()
   public updatePost(@Body() updatePostDto: PatchPostDto) {
     return this.postsService.updatePost(updatePostDto);

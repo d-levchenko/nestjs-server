@@ -2,7 +2,22 @@ POST http://localhost:3000/posts
 Content-Type: application/json
 
 {
-    "title": "Book 1",
-    "content": "Book content",
-    "author": "Book author"
+  "title": "Post title",
+  "postType": "post",
+  "slug": "post-test-request",
+  "status": "draft",
+  "content": "Post content",
+  "schema": "{\r\n    \"@context\": \"https:\/\/schema.org\",\r\n    \"@type\": \"Person\"\r\n  }",
+  "featuredImageUrl": "http://localhost.com/images/image1.jpg",
+  "publishOn": "2024-03-16T07:46:32+0000",
+  "tags": [
+    "tag1",
+    "tag2"
+  ],
+  "metaOptions": [
+    {
+      "key": "testKey",
+      "value": 20
+    }
+  ]
 }

@@ -36,7 +36,15 @@ export class PostsService {
     return {
       id: 1,
       title: createPostDto.title,
+      postType: createPostDto.postType,
+      slug: createPostDto.slug,
+      status: createPostDto.status,
       content: createPostDto.content,
+      schema: createPostDto.schema,
+      featuredImageUrl: createPostDto.featuredImageUrl,
+      publishOn: createPostDto.publishOn,
+      tags: createPostDto.tags,
+      metaOptions: createPostDto.metaOptions,
     };
   }
 
@@ -44,7 +52,15 @@ export class PostsService {
     return {
       id: 1,
       title: updatePostDto.title,
+      postType: updatePostDto.postType,
+      slug: updatePostDto.slug,
+      status: updatePostDto.status,
       content: updatePostDto.content,
+      schema: updatePostDto.schema,
+      featuredImageUrl: updatePostDto.featuredImageUrl,
+      publishOn: updatePostDto.publishOn,
+      tags: updatePostDto.tags,
+      metaOptions: updatePostDto.metaOptions,
     };
   }
 }
