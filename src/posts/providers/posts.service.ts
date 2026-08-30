@@ -32,20 +32,10 @@ export class PostsService {
     };
   }
 
-  public createPost(createPostDto: CreatePostDto) {
-    return {
-      id: 1,
-      title: createPostDto.title,
-      postType: createPostDto.postType,
-      slug: createPostDto.slug,
-      status: createPostDto.status,
-      content: createPostDto.content,
-      schema: createPostDto.schema,
-      featuredImageUrl: createPostDto.featuredImageUrl,
-      publishOn: createPostDto.publishOn,
-      tags: createPostDto.tags,
-      metaOptions: createPostDto.metaOptions,
-    };
+  public async createPost(createPostDto: CreatePostDto) {
+    const post = this.getPostById(1);
+
+    return post;
   }
 
   public updatePost(updatePostDto: PatchPostDto) {
