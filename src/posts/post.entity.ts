@@ -1,9 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { PostType } from './enums/postType.enum';
 import { postStatus } from './enums/postStatus.enum';
-import { CreatePostMetaOptionsDto } from './dtos/create-post-meta-options.dto';
+import { CreatePostMetaOptionsDto } from '../meta-options/dtos/create-post-meta-options.dto';
 
-@Entity({ name: 'posts' })
+@Entity()
 export class Post {
   @PrimaryGeneratedColumn()
   id: number;
@@ -30,7 +30,7 @@ export class Post {
   })
   status: postStatus;
 
-  @Column({ type: 'text', nullable: true, length: 1000 })
+  @Column({ type: 'text', nullable: true })
   content?: string;
 
   @Column({ type: 'text', nullable: true })
@@ -42,9 +42,7 @@ export class Post {
   @Column({ type: 'timestamp', nullable: true })
   publishOn?: Date;
 
-  @Column({ type: 'simple-array', nullable: true })
   tags?: string[];
 
-  @Column({ type: 'jsonb', nullable: true })
   metaOptions?: CreatePostMetaOptionsDto[];
 }
