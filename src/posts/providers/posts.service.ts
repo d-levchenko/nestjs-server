@@ -2,9 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { GetPostsParamDto } from '../dtos/get-posts-param.dto';
 import { CreatePostDto } from '../dtos/create-post.dto';
 import { PatchPostDto } from '../dtos/patch-post.dto';
+import { Post } from '../post.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { MetaOption } from 'src/meta-options/meta-option.entity';
 
 @Injectable()
 export class PostsService {
+  constructor(
+    @InjectRepository(Post)
+    private readonly postRepository: Repository<Post>,
+
+    @InjectRepository(MetaOption)
+    private readonly metaOptionsRepository: Repository<MetaOption>,
+  ) {}
+
   public getAllPosts(
     getPostsParamDto: GetPostsParamDto,
     limit: number,
@@ -33,9 +45,22 @@ export class PostsService {
   }
 
   public async createPost(createPostDto: CreatePostDto) {
-    const post = this.getPostById(1);
+    const metaOptions = createPostDto.metaOptions
+      ? this.metaOptionsRepository.create(createPostDto.metaOptions)
+      : null;
 
-    return post;
+    if (metaOptions) {
+      await this.metaOptionsRepository.save(metaOptions);
+    }
+
+    const { metaOptions: _unused, ...postDetails } = createPostDto;
+    const post = this.postRepository.create(postDetails);
+
+    if (metaOptions) {
+      post.metaOptions = metaOptions;
+    }
+
+    return await this.postRepository.save(post);
   }
 
   public updatePost(updatePostDto: PatchPostDto) {
